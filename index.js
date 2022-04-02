@@ -9,46 +9,55 @@ function computerPlay() {
 }
 
 
-
-
-
 function playRound(playerInput) {
   let compInput = computerPlay()
   console.log(`Computerinput: ${compInput} Playerinput: ${playerInput}`)
+  let result = ''
   if (compInput === playerInput) {
 
-    return "Tie"
+    result = "Tie"
 
   } else if (compInput == options[0] && playerInput == options[1]) {
     score[0] += 1
-    return "Player won"
+    result = "Player won"
   } else if (compInput == options[0] && playerInput == options[2]) {
     score[1] += 1
-    return `You Lose! Computer beat you with ${compInput}`
+    result = `You Lose! Computer beat you with ${compInput}`
   } else if (compInput == options[1] && playerInput == options[2]) {
     score[0] += 1
-    return "Player won"
+    result = "Player won"
   } else if (compInput == options[1] && playerInput == options[0]) {
     score[1] += 1
-    return `You Lose! Computer beat you with ${compInput}`
+    result = `You Lose! Computer beat you with ${compInput}`
   } else if (compInput == options[2] && playerInput == options[0]) {
     score[0] += 1
-    return "Player won"
+    result = "Player won"
   } else if (compInput == options[2] && playerInput == options[1]) {
     score[1] += 1
-    return `You Lose! Computer beat you with ${compInput}`
+    result = `You Lose! Computer beat you with ${compInput}`
   }
+  let bodyNode = document.querySelector("body")
+  let resNode = document.createElement("h1")
+  resNode.innerText = result
+  bodyNode.appendChild(resNode)
+
 }
 
-function game(x) {
-  for (let i = 0; i <= x; i++) {
-
-    let playerInput = window.prompt("Rock, Paper or Scissors")
-    console.log(playRound(playerInput))
-  }
-  alert(`The score is You: ${score[0]}, Computer: ${score[1]}`)
+function playerSelection(e) {
+  const selectedItem = e.target.innerText.toLowerCase()
+  playRound(selectedItem)
 }
+console.log("Select Buttons")
+let buttonEvents = document.querySelectorAll("button")
+
+buttonEvents.forEach(button => button.addEventListener('click', playerSelection))
 
 
-game(2)
+
+
+
+
+
+
+
 
